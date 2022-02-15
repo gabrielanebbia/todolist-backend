@@ -12,3 +12,12 @@ O frontend criado para a aplicação pode ser visualizado [aqui](https://github.
 
 O backend da aplicação foi desenvolvido utilizando das tecnologias da stack MERN, o MongoDB, o Express, e NodeJS.
 A arquitetura foi construida seguindo o modelo em camadas MSC (Model-Service-Controller).
+
+## Funcionalidades
+
+- [ ] Visualizar a lista de tarefas
+- [ ] Ordenar a lista por ordem alfabética, data de criação ou por status
+- [ ] Inserir uma nova tarefa na lista
+- [ ] Remover uma tarefa da lista
+- [ ] Atualizar uma tarefa da lista
+- [ ] Editar o status da tarefa (pendente, em andamento ou pronto)
