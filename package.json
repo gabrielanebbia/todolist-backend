@@ -7,6 +7,8 @@
     "test": "test"
   },
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "npm test"
   },
   "repository": {
@@ -23,7 +25,8 @@
     "eslint": "^8.9.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
-    "mocha-eslint": "^7.0.0"
+    "mocha-eslint": "^7.0.0",
+    "nodemon": "^2.0.15"
   },
   "dependencies": {
     "express": "^4.17.2"
