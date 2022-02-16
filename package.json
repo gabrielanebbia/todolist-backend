@@ -1,0 +1,22 @@
+{
+  "name": "todolist-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielanebbia/todolist-backend.git"
+  },
+  "author": "Gabriela Nebbia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielanebbia/todolist-backend/issues"
+  },
+  "homepage": "https://github.com/gabrielanebbia/todolist-backend#readme"
+}
