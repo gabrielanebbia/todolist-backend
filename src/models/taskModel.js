@@ -1,7 +1,7 @@
-const connection = require('./connection');
+const mongoConnection = require('./connection');
 
 const getAll = async () => {
-  const db = await connection();
+  const db = await mongoConnection.connection();
   const allTasks = await db
     .collection('tasks')
     .find()
