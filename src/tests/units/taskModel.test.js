@@ -51,6 +51,7 @@ describe('Get all tasks model', () => {
 
     it('should return an array', async () => {
       const response = await taskModel.getAll();
+
       expect(response).to.be.a('array');
     });
 
@@ -64,6 +65,24 @@ describe('Get all tasks model', () => {
       expect(response).to.have.length(tasks.length);
 
       expect(response).to.include.all.keys('_id', 'task', 'status');
+    });
+  });
+});
+
+describe('Create task model', () => {
+  describe('if a task is created', () => {
+    const task = tasksMocks.tasks[0];
+
+    it('should return an object', async () => {
+      const response = await taskModel.create(task);
+
+      expect(response).to.be.a('object');
+    });
+
+    it('should have a property "task', async () => {
+      const response = await taskModel.create(task);
+
+      expect(response).to.have.a.property('task');
     });
   });
 });
