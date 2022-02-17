@@ -7,9 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "mocha ./tests/units/**/*$NAME*.test.js --exit"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "mocha src/tests/units/**/*$NAME*.test.js --exit"
   },
   "repository": {
     "type": "git",
