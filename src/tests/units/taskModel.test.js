@@ -42,12 +42,12 @@ describe('Task model', () => {
 
       before(async () => {
         tasks.forEach((task) => {
-          connectionMock.db('modelTests').collection('task').insertOne(task);
+          connectionMock.db('modelTests').collection('tasks').insertOne(task);
         });
       });
 
       after(async () => {
-        await connectionMock.db('modelTests').collection('task').drop();
+        await connectionMock.db('modelTests').collection('tasks').deleteMany({});
       });
 
       it('should return an array', async () => {
@@ -74,21 +74,19 @@ describe('Task model', () => {
     describe('if a task is created', () => {
       const task = tasksMocks.tasks[0];
 
+      after(async () => {
+        await connectionMock.db('modelTests').collection('tasks').deleteMany({});
+      });
+
       it('should return an object', async () => {
         const response = await taskModel.create(task);
 
         expect(response).to.be.a('object');
       });
 
-      it('should have a property "task', async () => {
-        const response = await taskModel.create(task);
-
-        expect(response).to.have.a.property('task');
-      });
-
       it('should have a task created', async () => {
         const taskCreated = await connectionMock
-          .db('modelTest')
+          .db('modelTests')
           .collection('tasks')
           .findOne({ task });
         expect(taskCreated).to.be.not.null;
