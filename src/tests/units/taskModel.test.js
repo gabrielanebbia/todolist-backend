@@ -33,7 +33,7 @@ describe('1 - Get all tasks', () => {
     it('should return an empty array', async () => {
       const response = await taskModel.getAll();
 
-      expect(response).to.be([]);
+      expect(response).to.be.empty;
     });
   });
 
