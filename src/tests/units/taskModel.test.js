@@ -8,7 +8,7 @@ const taskModel = require('../../models/taskModel');
 
 const tasksMocks = require('../mocks/tasksMocks');
 
-describe('Get all tasks', () => {
+describe('Get all tasks model', () => {
   let connectionMock;
 
   before(async () => {
