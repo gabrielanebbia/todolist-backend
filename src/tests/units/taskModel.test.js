@@ -8,7 +8,7 @@ const taskModel = require('../../models/taskModel');
 
 const tasksMocks = require('../mocks/tasksMocks');
 
-describe('Get all tasks model', () => {
+describe('Task model', () => {
   let connectionMock;
 
   before(async () => {
@@ -22,48 +22,75 @@ describe('Get all tasks model', () => {
     MongoClient.connect.restore();
   });
 
-  describe('if has no tasks', () => {
-    it('should return an array', async () => {
-      const response = await taskModel.getAll();
+  describe('Get all tasks model', () => {
+    describe('if has no tasks', () => {
+      it('should return an array', async () => {
+        const response = await taskModel.getAll();
 
-      expect(response).to.be.a('array');
+        expect(response).to.be.a('array');
+      });
+
+      it('should return an empty array', async () => {
+        const response = await taskModel.getAll();
+
+        expect(response).to.be.empty;
+      });
     });
 
-    it('should return an empty array', async () => {
-      const response = await taskModel.getAll();
+    describe('if has tasks', () => {
+      const tasks = [...tasksMocks.tasks];
 
-      expect(response).to.be.empty;
+      before(async () => {
+        tasks.forEach((task) => {
+          connectionMock.db('modelTests').collection('tasks').insertOne(task);
+        });
+      });
+
+      after(async () => {
+        await connectionMock.db('modelTests').collection('tasks').deleteMany({});
+      });
+
+      it('should return an array', async () => {
+        const response = await taskModel.getAll();
+
+        expect(response).to.be.a('array');
+      });
+
+      it('should return an array with tasks', async () => {
+        const response = await taskModel.getAll();
+
+        response.forEach((task, index) => {
+          expect(task).to.be.equal(tasks[index]);
+        });
+
+        expect(response).to.have.length(tasks.length);
+
+        expect(response).to.include.all.keys('_id', 'task', 'status');
+      });
     });
   });
 
-  describe('if has tasks', () => {
-    const tasks = [...tasksMocks.tasks];
+  describe('Create task model', () => {
+    describe('if a task is created', () => {
+      const task = tasksMocks.tasks[0];
 
-    before(async () => {
-      tasks.forEach((task) => {
-        connectionMock.db('modelTests').collection('task').insertOne(task);
-      });
-    });
-
-    after(async () => {
-      await connectionMock.db('modelTests').collection('task').drop();
-    });
-
-    it('should return an array', async () => {
-      const response = await taskModel.getAll();
-      expect(response).to.be.a('array');
-    });
-
-    it('should return an array with tasks', async () => {
-      const response = await taskModel.getAll();
-
-      response.forEach((task, index) => {
-        expect(task).to.be.equal(tasks[index]);
+      after(async () => {
+        await connectionMock.db('modelTests').collection('tasks').deleteMany({});
       });
 
-      expect(response).to.have.length(tasks.length);
+      it('should return an object', async () => {
+        const response = await taskModel.create(task);
 
-      expect(response).to.include.all.keys('_id', 'task', 'status');
+        expect(response).to.be.a('object');
+      });
+
+      it('should have a task created', async () => {
+        const taskCreated = await connectionMock
+          .db('modelTests')
+          .collection('tasks')
+          .findOne({ task });
+        expect(taskCreated).to.be.not.null;
+      });
     });
   });
 });

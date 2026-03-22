@@ -10,6 +10,16 @@ const getAll = async () => {
   return allTasks;
 };
 
+const create = async (task) => {
+  const db = await mongoConnection.connection();
+  const { insertedId } = await db
+    .collection('tasks')
+    .insertOne(task);
+
+  return insertedId;
+};
+
 module.exports = {
   getAll,
+  create,
 };
